@@ -4,7 +4,7 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const DNF_API_KEY = process.env.REACT_APP_DNF_API_KEY;
 
 app.use(cors());
@@ -370,6 +370,9 @@ app.get('/api/itemName', async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("백엔드 서버가 정상적으로 실행 중입니다.");
+});
 
 
 app.listen(PORT, () => {
