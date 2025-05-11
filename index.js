@@ -54,7 +54,7 @@ app.get("/api/characters/details", async (req, res) => {
         characterImage:`https://img-api.neople.co.kr/df/servers/${serverId}/characters/${characterId}?zoom=3`
   }
     
-    console.log(detailedCharacters);
+    console.log(characterId);
     
     res.json(detailedCharacters);
   } catch (err) {
