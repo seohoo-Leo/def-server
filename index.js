@@ -99,26 +99,7 @@ app.get("/api/characters", async (req, res) => {
   }
 });
 
-//오늘의 등급 
 
-app.get('/api/today-grade', async (req, res) => {
-  try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
- 
-    const page = await browser.newPage();
-
-    await page.setRequestInterception(true);
-page.on('request', (req) => {
-  const type = req.resourceType();
-  if (['stylesheet', 'font', 'image'].includes(type)) {
-    req.abort();
-  } else {
-    req.continue();
-  }
-});
 
 //장착장비
 app.get('/api/EItem', async (req, res) => {
@@ -243,7 +224,6 @@ app.get("/api/avata", async (req, res) => {
     );
 
     res.json(data);
-    
   } catch (error) {
     console.error('DNF API 요청 실패:', error);
     res.status(500).json({ error: 'DNF API 호출 실패' });
@@ -351,6 +331,26 @@ app.get('/api/itemName', async (req, res) => {
 });
 
 
+//오늘의 등급 
+
+app.get('/api/today-grade', async (req, res) => {
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+ 
+    const page = await browser.newPage();
+
+    await page.setRequestInterception(true);
+page.on('request', (req) => {
+  const type = req.resourceType();
+  if (['stylesheet', 'font', 'image'].includes(type)) {
+    req.abort();
+  } else {
+    req.continue();
+  }
+});
 
 
   // 페이지 접속 (60초까지 기다림)
