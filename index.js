@@ -7,7 +7,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const DNF_API_KEY = process.env.REACT_APP_DNF_API_KEY;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://godnf.vercel.app', // 또는 정확한 배포 URL 입력
+  credentials: true
+}));
 //서버
 app.get('/api/servers', async (req, res) => {
   try {
